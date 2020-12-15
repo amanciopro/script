@@ -1,0 +1,13 @@
+#! /bin/bash
+
+cat /etc/passwd | cut -f 1,3 -d : > /root/uid.txt
+
+for i in `cat /root/uid.txt`
+do
+        if [[ $(echo "$i"|cut -f 2 -d :) -ge 1003 ]]
+        then
+        echo "Deleting User $(echo "$i" | cut -f 1 -d :)"
+        userdel $(echo "$i" | cut -f 1 -d :) && echo "Deleted User $(echo "$i" | cut -f 1 -d :)"
+        fi
+done
+

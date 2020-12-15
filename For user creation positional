@@ -1,0 +1,14 @@
+#! /bin/bash
+
+IFS=','
+for i in $@
+do
+        if [[ $(cat /etc/passwd | grep $i) == *$i* ]]
+        then
+        echo "user $i already exists"
+        else
+        echo "Creating User $i"
+        useradd $i
+        fi
+
+done
